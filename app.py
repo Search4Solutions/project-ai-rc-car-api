@@ -9,7 +9,14 @@ def index():
 #Direction endpoint
 @app.route('/direction', methods=['POST'])
 def set_direction():
-    #First check if there's a parameter in the form.
+    #First check if APIKey is correct.
+    entered_apikey = request.args.get('apikey')
+    f = open('secrets', 'r')
+    secret = f.readline()
+    if secret != entered_apikey:
+        return 'Invalid API key.', 401
+    
+    #Check if there's a parameter in the form.
     parameter = request.form.get('direction')
     if not parameter:
         return 'No parameter given in form.', 400
@@ -27,12 +34,20 @@ def set_direction():
     else:
         return 'Invalid direction parameter.', 400
 
+#Speed endpoint
 @app.route('/speed', methods=['POST'])
 def set_speed():
-    #First check if there's a parameter in the form.
+    #First check if APIKey is correct.
+    entered_apikey = request.args.get('apikey')
+    f = open('secrets', 'r')
+    secret = f.readline()
+    if secret != entered_apikey:
+        return 'Invalid API key.', 401
+	
+	#Check if there's a parameter in the form.
     parameter = request.form.get('speed')
     if not parameter:
-        return 'No parameter given in form.'
+        return 'No parameter given in form.', 400
     
     #Check which speed is provided, return 'bad request' if invalid speed is given.
     speed = request.form['speed']
