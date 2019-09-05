@@ -9,16 +9,17 @@ motorSteerRightPin = 22 #15
 motorDrivePWM = 5 #29
 motorSteerPWM = 6 #31
 
-pwm_drive = GPIO.PWM(motorDrivePWM, 10000)
-pwm_steer = GPIO.PWM(motorSteerPWM, 10000)
-
 GPIO.setmode(GPIO.BCM)
+
 GPIO.setup(4, GPIO.OUT)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
 GPIO.setup(22, GPIO.OUT)
 GPIO.setup(5, GPIO.OUT)
 GPIO.setup(6, GPIO.OUT)
+
+pwm_drive = GPIO.PWM(motorDrivePWM, 10000)
+pwm_steer = GPIO.PWM(motorSteerPWM, 10000)
 
 #If no endpoint is called, then show the usage page.
 @app.route('/', methods=['GET', 'POST'])
